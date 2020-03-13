@@ -3,7 +3,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const color = require("color");
 const chalk = require("chalk");
 
 require("dotenv").config();
