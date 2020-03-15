@@ -9,7 +9,12 @@ function Search_bar() {
 
     return (
         <>
-            <input type="text" onChange={handleChange} />
+            <input
+                className="form-control"
+                type="text"
+                placeholder="Search for"
+                onChange={handleChange}
+            />
         </>
     );
 }
