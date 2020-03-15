@@ -1,11 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function Search_bar() {
-    const [search, setSearch] = useState({});
+function Home() {
+    const [apiData, setApiData] = useState([]);
+    const baseUrl = "https://www.googleapis.com/youtube/v3";
+    const apiKey = "AIzaSyB18FqBJ3VKubboJjAs_ZYn-2jNBsP1sEk";
+    const q = "cats";
+    const videoSearchUrl = `${baseUrl}/search?part=snippet&q=${q}&type=video&key=${apiKey}`;
+    const url = "https://www.youtube.com/embed/";
+
+    let userInput = "";
 
     const handleChange = e => {
-        console.log(e.target.value);
+        return (userInput = e.target.value);
     };
+
+    useEffect(() => {
+        axios
+            .get(videoSearchUrl)
+            .then(res => {
+                let items = res.data.items;
+                console.log(items);
+                setApiData(items);
+            })
+            .catch(err => console.log(err));
+    }, []);
 
     return (
         <>
@@ -15,8 +34,9 @@ function Search_bar() {
                 placeholder="Search for"
                 onChange={handleChange}
             />
+            {/* <button className="btn btn-secondary">submit</button> */}
         </>
     );
 }
 
-export default Search_bar;
+export default Home;
