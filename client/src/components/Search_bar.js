@@ -3,10 +3,10 @@ import axios from "axios";
 
 function Search_bar() {
     const [apiData, setApiData] = useState([]);
-    const [search, setSearch] = useState("cats");
+    const [search, setSearch] = useState("trending");
     const baseUrl = "https://www.googleapis.com/youtube/v3";
     const apiKey = "AIzaSyAakxYQit1DRIQag9AXDESHnUc2P6lNwBk";
-    const videoSearchUrl = `${baseUrl}/search?part=snippet&maxResults=10&q=${search}&type=video&key=${apiKey}`;
+    const videoSearchUrl = `${baseUrl}/search?part=snippet&maxResults=7&q=${search}&type=video&key=${apiKey}`;
     const [currentVideo, setCurrentVideo] = useState("");
     const url = "https://www.youtube.com/embed/" + currentVideo;
 
@@ -37,9 +37,19 @@ function Search_bar() {
         console.log(e.target);
     };
 
+    const getDate = date => {
+        return (
+            date.getDate() +
+            "/" +
+            (date.getMonth() + 1) +
+            "/" +
+            date.getFullYear()
+        );
+    };
+
     return (
         <>
-            <div className="input-group mb-5 mt-3">
+            <div className="input-group mb-5 mt-3 bg-dark">
                 <input
                     className="form-control"
                     type="text"
@@ -57,47 +67,49 @@ function Search_bar() {
             </div>
 
             <div className="container">
-                <div className="video-detail col-md-8">
-                    <div className="embed-responsive embed-responsive-16by9">
-                        <iframe
-                            src={url}
-                            className="embed-responsive-item"
-                        ></iframe>
-                    </div>
+                <div className="row">
+                    <div className="video-detail col-md-8">
+                        <div className="embed-responsive embed-responsive-16by9">
+                            <iframe
+                                src={url}
+                                className="embed-responsive-item"
+                            ></iframe>
+                        </div>
 
-                    <div className="detail">
-                        <div>{""}</div>
+                        <div className="detail">
+                            <div>{""}</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div className="container mt-5">
-                <ul className="row">
-                    {apiData.map(video => (
-                        <li
-                            className="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mb-5 text-center m-1"
-                            style={{
-                                display: "inline",
-                                backgroundColor: "#242424"
-                            }}
-                            key={video.id.videoId}
-                        >
-                            <img
-                                style={{ cursor: "pointer" }}
-                                onClick={handleCurrentVideo}
-                                data={video.id.videoId}
-                                src={video.snippet.thumbnails.default.url}
-                            />
-                            <br />
-                            <a
-                                href={""}
-                                className="badge badge-secondary btn-sm my-2 p-2"
+                    <ul className="col-md-4 borderDefault">
+                        {apiData.map(video => (
+                            <li
+                                className="text-center"
+                                style={{
+                                    display: "inline",
+                                    backgroundColor: "#242424"
+                                }}
+                                key={video.id.videoId}
                             >
-                                SAVE
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+                                <img
+                                    style={{ cursor: "pointer", width: "100%" }}
+                                    onClick={handleCurrentVideo}
+                                    data={video.id.videoId}
+                                    src={video.snippet.thumbnails.high.url}
+                                />
+                                <div className="title">
+                                    {video.snippet.title}
+                                </div>
+
+                                {/* <a
+                                    href={""}
+                                    className="badge badge-secondary btn-sm my-2 p-2"
+                                >
+                                    SAVE
+                                </a> */}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </>
     );

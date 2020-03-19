@@ -4,7 +4,7 @@ import Search_bar from "./components/Search_bar";
 
 function App() {
     return (
-        <div className="App container">
+        <div className="App container borderDefault">
             <Header />
             <Search_bar />
         </div>
