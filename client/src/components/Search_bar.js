@@ -28,15 +28,37 @@ function Search_bar() {
 
     return (
         <>
-            <input
-                className="form-control"
-                type="text"
-                placeholder="Search for"
-                onChange={handleChange}
-            />
-            <button onClick={handleSubmit} className="btn btn-secondary">
-                submit
-            </button>
+            <div className="input-group mb-5 mt-3">
+                <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Search for"
+                    onChange={handleChange}
+                />
+                <div className="input-group-prepend">
+                    <button
+                        onClick={handleSubmit}
+                        className="btn btn-secondary"
+                    >
+                        submit
+                    </button>
+                </div>
+            </div>
+
+            <div className="container">
+                <div className="video-detail col-md-8">
+                    <div className="embed-responsive embed-responsive-16by9">
+                        <iframe
+                            src={url}
+                            className="embed-responsive-item"
+                        ></iframe>
+                    </div>
+
+                    <div className="detail">
+                        <div>{""}</div>
+                    </div>
+                </div>
+            </div>
 
             <div className="container">
                 <ul>
