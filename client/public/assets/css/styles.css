@@ -1,0 +1,9 @@
+#root {
+    background: #1d1d1d;
+    min-height: 100vh;
+}
+
+.App {
+    background-color: #242424;
+    border: solid 1px #383838;
+}

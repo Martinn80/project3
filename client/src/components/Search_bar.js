@@ -6,11 +6,9 @@ function Search_bar() {
     const [search, setSearch] = useState("cats");
     const baseUrl = "https://www.googleapis.com/youtube/v3";
     const apiKey = "AIzaSyAakxYQit1DRIQag9AXDESHnUc2P6lNwBk";
-    const videoSearchUrl = `${baseUrl}/search?part=snippet&q=${search}&type=video&key=${apiKey}`;
+    const videoSearchUrl = `${baseUrl}/search?part=snippet&maxResults=10&q=${search}&type=video&key=${apiKey}`;
     const [currentVideo, setCurrentVideo] = useState("");
     const url = "https://www.youtube.com/embed/" + currentVideo;
-
-    let someVar = { value: "" };
 
     const handleChange = e => {
         const userInput = e.target.value;
@@ -77,22 +75,26 @@ function Search_bar() {
                 <ul className="row">
                     {apiData.map(video => (
                         <li
-                            className="col mb-5 text-center border m-1 bg-light"
-                            style={{ display: "inline" }}
+                            className="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 mb-5 text-center m-1"
+                            style={{
+                                display: "inline",
+                                backgroundColor: "#242424"
+                            }}
                             key={video.id.videoId}
                         >
                             <img
+                                style={{ cursor: "pointer" }}
                                 onClick={handleCurrentVideo}
                                 data={video.id.videoId}
                                 src={video.snippet.thumbnails.default.url}
                             />
                             <br />
-                            <button
-                                onClick={handleSave}
-                                className="btn btn-sm btn-primary my-2 p-2"
+                            <a
+                                href={""}
+                                className="badge badge-secondary btn-sm my-2 p-2"
                             >
-                                + save
-                            </button>
+                                SAVE
+                            </a>
                         </li>
                     ))}
                 </ul>
