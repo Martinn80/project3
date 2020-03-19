@@ -3,19 +3,21 @@ import axios from "axios";
 
 function Home() {
     const [apiData, setApiData] = useState([]);
+    const [search, setSearch] = useState("cats")
     const baseUrl = "https://www.googleapis.com/youtube/v3";
-    const apiKey = "AIzaSyB18FqBJ3VKubboJjAs_ZYn-2jNBsP1sEk";
-    const q = "cats";
-    const videoSearchUrl = `${baseUrl}/search?part=snippet&q=${q}&type=video&key=${apiKey}`;
+    const apiKey = "AIzaSyAakxYQit1DRIQag9AXDESHnUc2P6lNwBk";
+    const videoSearchUrl = `${baseUrl}/search?part=snippet&q=${search}&type=video&key=${apiKey}`;
     const url = "https://www.youtube.com/embed/";
 
-    let userInput = "";
-
     const handleChange = e => {
-        return (userInput = e.target.value);
+        const userInput = e.target.value;
+        setSearch(userInput)
     };
 
-    useEffect(() => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+
         axios
             .get(videoSearchUrl)
             .then(res => {
@@ -24,7 +26,7 @@ function Home() {
                 setApiData(items);
             })
             .catch(err => console.log(err));
-    }, []);
+    }
 
     return (
         <>
@@ -34,7 +36,17 @@ function Home() {
                 placeholder="Search for"
                 onChange={handleChange}
             />
-            {/* <button className="btn btn-secondary">submit</button> */}
+            <button onClick={handleSubmit} className="btn btn-secondary">submit</button>
+
+            <div className="container">
+                <ul>
+                    {apiData.map(video =>
+                        <li key={video.id.videoId}>
+                            <a href={url + video.id.videoId}><img src={video.snippet.thumbnails.default.url} alt="" /></a>
+                        </li>
+                    )}
+                </ul>
+            </div>
         </>
     );
 }

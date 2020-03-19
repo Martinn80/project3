@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Search_bar from "./components/Search_bar";
-import Video from "./components/Video";
-import HeroVideo from "./components/HeroVideo";
 import Header from "./components/Header";
+import Home from "./components/Search_bar";
 
 function App() {
     return (
@@ -11,8 +10,6 @@ function App() {
                 <h1>Youtube App</h1>
                 <Header />
                 <Search_bar />
-                <HeroVideo />
-                <Video />
             </div>
         </div>
     );
