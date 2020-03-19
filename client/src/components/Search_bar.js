@@ -59,7 +59,6 @@ function Search_bar() {
                             <a href={url + video.id.videoId}>
                                 <img
                                     src={video.snippet.thumbnails.default.url}
-                                    alt=""
                                 />
                             </a>
                         </li>
