@@ -7,12 +7,20 @@ function Search_bar() {
     // const [query, setQuery] = useState("cats");
     let query = "cat";
     const [apiData, setApiData] = useState([]);
+    const [search, setSearch] = useState("cats");
     const baseUrl = "https://www.googleapis.com/youtube/v3";
-    const apiKey = "AIzaSyB18FqBJ3VKubboJjAs_ZYn-2jNBsP1sEk";
-    const videoSearchUrl = `${baseUrl}/search?part=snippet&q=${query}&type=video&key=${apiKey}`;
+    const apiKey = "AIzaSyAakxYQit1DRIQag9AXDESHnUc2P6lNwBk";
+    const videoSearchUrl = `${baseUrl}/search?part=snippet&q=${search}&type=video&key=${apiKey}`;
     const url = "https://www.youtube.com/embed/";
 
-    useEffect(() => {
+    const handleChange = e => {
+        const userInput = e.target.value;
+        setSearch(userInput);
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
         axios
             .get(videoSearchUrl)
             .then(res => {
@@ -20,7 +28,7 @@ function Search_bar() {
                 setApiData(items);
             })
             .catch(err => console.log(err));
-    }, []);
+    };
 
     const handleChange = e => {
         return e;
@@ -34,65 +42,29 @@ function Search_bar() {
 
     return (
         <>
-            <nav className="navbar navbar-light bg-light">
-                <form className="form-inline">
-                    <input
-                        className="form-control mr-sm-2"
-                        type="search"
-                        placeholder="Search"
-                        onChange={handleChange}
-                    />
-                    <button
-                        className="btn btn-outline-success my-2 my-sm-0"
-                        type="submit"
-                        onSubmit={handleSubmit}
-                    >
-                        Search
-                    </button>
-                </form>
-            </nav>
-            {/* Search-bar */}
-            <div className="video-detail col-md-8">
-                <div className="embed-responsive embed-responsive-16by9">
-                    <iframe className="embed-responsive-item" src=""></iframe>
-                </div>
-            </div>
+            <input
+                className="form-control"
+                type="text"
+                placeholder="Search for"
+                onChange={handleChange}
+            />
+            <button onClick={handleSubmit} className="btn btn-secondary">
+                submit
+            </button>
 
-            {/* All Videos */}
-            <div className="row mt-5 mb-5">
-                {apiData.map(item => (
-                    <div
-                        className="col-xs-12 col-sm-6 col-md-4"
-                        key={item.id.videoId}
-                    >
-                        <div
-                            className="card mb-5"
-                            style={{ width: "18rem", minHeight: "550px" }}
-                        >
-                            <a href={url + item.id.videoId}>
+            <div className="container">
+                <ul>
+                    {apiData.map(video => (
+                        <li key={video.id.videoId}>
+                            <a href={url + video.id.videoId}>
                                 <img
-                                    className="card-img-top"
-                                    src={item.snippet.thumbnails.default.url}
-                                    alt="Card image cap"
+                                    src={video.snippet.thumbnails.default.url}
+                                    alt=""
                                 />
                             </a>
-                            <div className="card-body">
-                                <h5 className="card-title">
-                                    {item.snippet.title}
-                                </h5>
-                                <small className="font-weight-bold">
-                                    {item.snippet.publishedAt}
-                                </small>
-                                <p className="card-text">
-                                    {item.snippet.description}
-                                </p>
-                                <a href="#" className="btn btn-primary">
-                                    + Add to Collection
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                        </li>
+                    ))}
+                </ul>
             </div>
         </>
     );
