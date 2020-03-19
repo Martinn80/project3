@@ -1,7 +1,6 @@
 import React from "react";
-import Search_bar from "./components/Search_bar";
 import Header from "./components/Header";
-import Home from "./components/Search_bar";
+import Search_bar from "./components/Search_bar";
 
 function App() {
     return (

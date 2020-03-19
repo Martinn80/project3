@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import HeroVideo from "./HeroVideo";
-// import Video from "./Video";
 
 function Search_bar() {
-    // const [query, setQuery] = useState("cats");
-    let query = "cat";
     const [apiData, setApiData] = useState([]);
     const [search, setSearch] = useState("cats");
     const baseUrl = "https://www.googleapis.com/youtube/v3";
@@ -28,16 +24,6 @@ function Search_bar() {
                 setApiData(items);
             })
             .catch(err => console.log(err));
-    };
-
-    const handleChange = e => {
-        return e;
-    };
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        let q = handleChange();
-        return (query = q);
     };
 
     return (
