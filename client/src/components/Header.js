@@ -12,7 +12,6 @@ function Header() {
                                     src="assets/img/logo.png"
                                     style={{ width: "175px" }}
                                 />
-                                funTube
                             </span>
                         </a>
                         <button

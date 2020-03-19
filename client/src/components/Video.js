@@ -13,7 +13,6 @@ function Home() {
             .get(videoSearchUrl)
             .then(res => {
                 let items = res.data.items;
-                console.log(items);
                 setApiData(items);
             })
             .catch(err => console.log(err));
@@ -28,7 +27,7 @@ function Home() {
                         key={item.id.videoId}
                     >
                         <div
-                            class="card mb-5"
+                            className="card mb-5"
                             style={{ width: "18rem", minHeight: "550px" }}
                         >
                             <a href={url + item.id.videoId}>
@@ -48,7 +47,7 @@ function Home() {
                                 <p className="card-text">
                                     {item.snippet.description}
                                 </p>
-                                <a href="#" class="btn btn-primary">
+                                <a href="#" className="btn btn-primary">
                                     + Add to Collection
                                 </a>
                             </div>

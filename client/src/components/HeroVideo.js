@@ -12,8 +12,8 @@ function HeroVideo() {
         axios
             .get(videoSearchUrl)
             .then(res => {
-                console.log(res.data.items[0].id.videoId);
-                setVideo(res.data.items[0].id.videoId);
+                console.log(res.data.items);
+                setVideo(res.data);
             })
             .catch(err => console.log(err));
     }, []);
@@ -22,10 +22,8 @@ function HeroVideo() {
         <>
             <div className="video-detail col-md-8">
                 <div className="embed-responsive embed-responsive-16by9">
-                    <iframe
-                        className="embed-responsive-item"
-                        src={url + video}
-                    ></iframe>
+                    {console.log(video)}
+                    <iframe className="embed-responsive-item" src=""></iframe>
                 </div>
             </div>
         </>
