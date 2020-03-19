@@ -7,8 +7,10 @@ function Search_bar() {
     const baseUrl = "https://www.googleapis.com/youtube/v3";
     const apiKey = "AIzaSyAakxYQit1DRIQag9AXDESHnUc2P6lNwBk";
     const videoSearchUrl = `${baseUrl}/search?part=snippet&q=${search}&type=video&key=${apiKey}`;
-    const [currentVideo, setCurrentVideo] = useState();
-    const url = "https://www.youtube.com/embed/";
+    const [currentVideo, setCurrentVideo] = useState("");
+    const url = "https://www.youtube.com/embed/" + currentVideo;
+
+    let someVar = { value: "" };
 
     const handleChange = e => {
         const userInput = e.target.value;
@@ -22,9 +24,19 @@ function Search_bar() {
             .get(videoSearchUrl)
             .then(res => {
                 let items = res.data.items;
+                console.log(res.data.items);
                 setApiData(items);
             })
             .catch(err => console.log(err));
+    };
+
+    const handleCurrentVideo = e => {
+        console.log(e.target.attributes[0].value);
+        setCurrentVideo(e.target.attributes[0].value);
+    };
+
+    const handleSave = e => {
+        console.log(e.target);
     };
 
     return (
@@ -65,15 +77,22 @@ function Search_bar() {
                 <ul className="row">
                     {apiData.map(video => (
                         <li
-                            className="col mb-5"
+                            className="col mb-5 text-center border m-1 bg-light"
                             style={{ display: "inline" }}
                             key={video.id.videoId}
                         >
-                            <a href={url + video.id.videoId}>
-                                <img
-                                    src={video.snippet.thumbnails.default.url}
-                                />
-                            </a>
+                            <img
+                                onClick={handleCurrentVideo}
+                                data={video.id.videoId}
+                                src={video.snippet.thumbnails.default.url}
+                            />
+                            <br />
+                            <button
+                                onClick={handleSave}
+                                className="btn btn-sm btn-primary my-2 p-2"
+                            >
+                                + save
+                            </button>
                         </li>
                     ))}
                 </ul>
