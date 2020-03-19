@@ -7,6 +7,7 @@ function Search_bar() {
     const baseUrl = "https://www.googleapis.com/youtube/v3";
     const apiKey = "AIzaSyAakxYQit1DRIQag9AXDESHnUc2P6lNwBk";
     const videoSearchUrl = `${baseUrl}/search?part=snippet&q=${search}&type=video&key=${apiKey}`;
+    const [currentVideo, setCurrentVideo] = useState();
     const url = "https://www.youtube.com/embed/";
 
     const handleChange = e => {
@@ -60,10 +61,14 @@ function Search_bar() {
                 </div>
             </div>
 
-            <div className="container">
-                <ul>
+            <div className="container mt-5">
+                <ul className="row">
                     {apiData.map(video => (
-                        <li key={video.id.videoId}>
+                        <li
+                            className="col mb-5"
+                            style={{ display: "inline" }}
+                            key={video.id.videoId}
+                        >
                             <a href={url + video.id.videoId}>
                                 <img
                                     src={video.snippet.thumbnails.default.url}
