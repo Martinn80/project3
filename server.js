@@ -26,6 +26,7 @@ app.use(express.static("./client"));
 
 // api route
 app.use("/", require("./routes/api-routes"));
+app.use("/", require("./routes/client-routes"));
 
 // server listening at port
 app.listen(PORT, () => {

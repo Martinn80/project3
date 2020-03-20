@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
 
 const videoSchema = new mongoose.Schema({
-    title: {
-        type: String
+    videoId: {
+        type: String,
+        required: true
     },
-    views: {
-        type: Number
+    videoImg: {
+        type: String,
+        required: true
     },
-    publishedAt: {
-        type: Date
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 
